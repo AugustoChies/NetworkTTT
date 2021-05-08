@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
+    public static Board Instance { get; private set; }
+
     public Row[] rows = new Row[3];
     public GameObject[] tiles;
     public Material[] materials;
@@ -14,8 +16,12 @@ public class Board : MonoBehaviour
 
     public GameObject spawner;
     public DeleteList deleteList;
+
+    public ReferenceKeeping keeper;
+    private Vector3 spawnerPos = new Vector3(0, 12, 0);
     private void Start()
-    {        
+    {
+        Instance = this;
         timeout = false;
         Setup();        
     }
@@ -25,7 +31,6 @@ public class Board : MonoBehaviour
         deleteList.DestroyList();
         deleteList.Setup();
         gameOver = false;
-        GlobalInfo.current_player = 0;
         for (int i = 0; i < 3; i++)
         {
             for (int k = 0; k < 3; k++)
@@ -36,56 +41,31 @@ public class Board : MonoBehaviour
         }
     }
 
-    void Update()
+    public void UpdateBoard(ulong callerdID, int row,int collum)
     {
-        if (!timeout)
-        {
-            if (GlobalInfo.isAi[GlobalInfo.current_player] && !gameOver)
-            {                
-                RunMinMax();
-            }
-            else if (Input.GetMouseButtonDown(0) && !gameOver)
-            {
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit,Mathf.Infinity, 1 << LayerMask.NameToLayer("Sections")))
-                {
-                    if (hit.transform.gameObject.GetComponent<Boardsection>())
-                    {
-                        hit.transform.gameObject.GetComponent<Boardsection>().GotClicked();
-                    }
-                }
-            }
-        }
+        if (callerdID != ServerManager.Instance.GetCurrentPlayer()) return;
 
-        if(Input.GetKeyDown(KeyCode.R)) //Restart
+        if (rows[row].element[collum] == SectionStatus.empty)
         {
-            Setup();
+            rows[row].element[collum] = (SectionStatus)(ServerManager.Instance.currentPlayerIndex + 1);            
+            int result = CheckBoardState();
+            ServerManager.Instance.ChangeCurrentPlayer();
+            EndGameCheck(result);
+
+            PlayerController servercontroller = keeper.GetLocalPlayer();
         }
     }
 
-    public void UpdateBoard(int row,int collum)
+    public void PlayVisuals(int row, int collum)
     {
-        if (rows[row].element[collum] == SectionStatus.empty)
-        {
-            rows[row].element[collum] = (SectionStatus)(GlobalInfo.current_player + 1);
-            tiles[collum + row * 3].GetComponent<Renderer>().material = materials[GlobalInfo.current_player + 1];
-            int result = CheckBoardState();
-            ActivateSpawner(tiles[collum + row * 3].transform.position + new Vector3(0, 12, 0));
-            EndGameCheck(result);            
-            GlobalInfo.current_player += 1;
-            GlobalInfo.current_player %= 2;
-            if(GlobalInfo.isAi[GlobalInfo.current_player])
-            {
-                StartCoroutine(TimeoutTime());
-            }
-        }
+        tiles[collum + row * 3].GetComponent<Renderer>().material = materials[ServerManager.Instance.currentPlayerIndex + 1];
+        ActivateSpawner(tiles[collum + row * 3].transform.position + spawnerPos);
     }
 
     public void ActivateSpawner(Vector3 spawnPos)
     {
         GameObject spawnerO = Instantiate(spawner, spawnPos, Quaternion.identity);
-        spawnerO.GetComponent<SpawnerScript>().player = GlobalInfo.current_player;
+        spawnerO.GetComponent<SpawnerScript>().player = ServerManager.Instance.currentPlayerIndex;
     }
 
     // 0 = Ongoing; 1 = Tictacs win; 2 = Toes win; 3 = Tie;
@@ -194,17 +174,6 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void RunMinMax()
-    {
-        AiPlay play = MinMax.StartMinMax(this);
-        UpdateBoard(play.row, play.collum);
-    }
-
-    WaitForSeconds waittime = new WaitForSeconds(1f);
-    IEnumerator TimeoutTime()
-    {
-        timeout = true;
-        yield return waittime;
-        timeout = false;
-    }
+    
+    
 }

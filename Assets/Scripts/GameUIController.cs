@@ -20,22 +20,36 @@ public class GameUIController : MonoBehaviour
 
     [Space()]
     public GameObject waitCanvas;
-    public Board board;
 
     private readonly string localhost = "127.0.0.1";
-    
-    
+
+    private void Start()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback += GoToGame;        
+    }
+
+
 
     public void StartServerButton()
     {
+        this.GetComponent<AudioSource>().Play();
         waitCanvas.SetActive(true);
         menuCanvas.SetActive(false);
+        if (NetworkManager.Singleton.IsClient)
+        {
+            NetworkManager.Singleton.StopClient();
+        }
         NetworkManager.Singleton.StartHost();
     }
 
     public void StartClientButton()
     {
+        this.GetComponent<AudioSource>().Play();
         NetworkManager manager = NetworkManager.Singleton;
+        if (NetworkManager.Singleton.IsClient)
+        {
+            NetworkManager.Singleton.StopClient();
+        }
         if (adressField.text == "")
         {
             manager.GetComponent<UNetTransport>().ConnectAddress = localhost;
@@ -71,12 +85,20 @@ public class GameUIController : MonoBehaviour
         }
     }
 
+    public void GoToGame(ulong newplayer)
+    {
+        waitCanvas.SetActive(false);
+        menuCanvas.SetActive(false);
+        Board.Instance.gameObject.SetActive(true);
+        ServerManager.Instance.AddPlayer(newplayer);
+    }
+
 
     public void RetryButton()
     {
         this.GetComponent<AudioSource>().Play();
         gameCanvas.SetActive(false);
-        board.Setup();
+        Board.Instance.Setup();
     }
 
     public void MenuButton()

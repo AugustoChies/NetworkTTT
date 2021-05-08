@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &50355960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 50355962}
+  - component: {fileID: 50355961}
+  m_Layer: 0
+  m_Name: ServerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &50355961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50355960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f730373c0bc5ec940a791b18dfc6078f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIDList: 
+  currentPlayer: 0
+--- !u!4 &50355962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50355960}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 354, y: 381.47424, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &296892313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,6 +175,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 879197173, guid: 6dd479a00231e0e4f9b25a0a1bde3b15, type: 3}
+      propertyPath: UIController
+      value: 
+      objectReference: {fileID: 1230250807}
     - target: {fileID: 1761958541, guid: 6dd479a00231e0e4f9b25a0a1bde3b15, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -223,6 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 1593831625}
   uIController: {fileID: 0}
+  server: {fileID: 0}
 --- !u!4 &340891141
 Transform:
   m_ObjectHideFlags: 0
@@ -619,22 +669,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3423161652643329480, guid: 7fd33635334e17646afcb002d26e8c7b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1230250807}
-    - target: {fileID: 3423161652643329480, guid: 7fd33635334e17646afcb002d26e8c7b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartServerButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 3423161652643329480, guid: 7fd33635334e17646afcb002d26e8c7b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameUIController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3423161652643329480, guid: 7fd33635334e17646afcb002d26e8c7b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3423161652868746656, guid: 7fd33635334e17646afcb002d26e8c7b, type: 3}
       propertyPath: board
       value: 
