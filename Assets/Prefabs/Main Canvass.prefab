@@ -118,11 +118,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameCanvas: {fileID: 2204947960770030263}
   winnerText: {fileID: 3423161651289789769}
+  ServerUI: {fileID: 7148497030106840488}
+  ClientUI: {fileID: 1739044994977251593}
   menuCanvas: {fileID: 3423161651824967391}
   adressField: {fileID: 3423161652449424628}
-  waitCanvas: {fileID: 3625848627671938768}
   board: {fileID: 0}
-  connectedPlayer: 0
+  waitCanvas: {fileID: 3625848627671938768}
 --- !u!82 &3830073431912388040
 AudioSource:
   m_ObjectHideFlags: 0
@@ -471,6 +472,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3423161652868746668}
     m_Modifications:
+    - target: {fileID: 3849130551535243206, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3423161652868746656}
+    - target: {fileID: 3849130551535243206, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RetryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180921973494765451, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3423161652868746656}
+    - target: {fileID: 5180921973494765451, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MenuButton
+      objectReference: {fileID: 0}
     - target: {fileID: 7305137417885935170, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
       propertyPath: m_Name
       value: GameCanvas
@@ -586,3 +603,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7148497030106840488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1786824690281083229, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
+  m_PrefabInstance: {fileID: 8933034696068697333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1739044994977251593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7195300366397754876, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
+  m_PrefabInstance: {fileID: 8933034696068697333}
+  m_PrefabAsset: {fileID: 0}

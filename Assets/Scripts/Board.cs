@@ -9,7 +9,6 @@ public class Board : MonoBehaviour
     public Row[] rows = new Row[3];
     public GameObject[] tiles;
     public Material[] materials;
-    public GameUIController UIController;
 
     public bool gameOver;
     public bool timeout;
@@ -44,28 +43,30 @@ public class Board : MonoBehaviour
     public void UpdateBoard(ulong callerdID, int row,int collum)
     {
         if (callerdID != ServerManager.Instance.GetCurrentPlayer()) return;
+        if (gameOver == true) return;
 
         if (rows[row].element[collum] == SectionStatus.empty)
         {
             rows[row].element[collum] = (SectionStatus)(ServerManager.Instance.currentPlayerIndex + 1);            
             int result = CheckBoardState();
+            int madeThePlayID = ServerManager.Instance.currentPlayerIndex;
             ServerManager.Instance.ChangeCurrentPlayer();
-            EndGameCheck(result);
-
             PlayerController servercontroller = keeper.GetLocalPlayer();
+            EndGameCheck(result, servercontroller);
+            servercontroller.CallClientVisualChange(row, collum, madeThePlayID);
         }
     }
 
-    public void PlayVisuals(int row, int collum)
+    public void PlayVisuals(int row, int collum, int currentPlayer)
     {
-        tiles[collum + row * 3].GetComponent<Renderer>().material = materials[ServerManager.Instance.currentPlayerIndex + 1];
-        ActivateSpawner(tiles[collum + row * 3].transform.position + spawnerPos);
+        tiles[collum + row * 3].GetComponent<Renderer>().material = materials[currentPlayer + 1];
+        ActivateSpawner(tiles[collum + row * 3].transform.position + spawnerPos,currentPlayer);
     }
 
-    public void ActivateSpawner(Vector3 spawnPos)
+    public void ActivateSpawner(Vector3 spawnPos, int currentPlayer)
     {
         GameObject spawnerO = Instantiate(spawner, spawnPos, Quaternion.identity);
-        spawnerO.GetComponent<SpawnerScript>().player = ServerManager.Instance.currentPlayerIndex;
+        spawnerO.GetComponent<SpawnerScript>().player = currentPlayer;
     }
 
     // 0 = Ongoing; 1 = Tictacs win; 2 = Toes win; 3 = Tie;
@@ -164,14 +165,19 @@ public class Board : MonoBehaviour
         return 3;
     }
 
-    public void EndGameCheck(int state)
+    public void EndGameCheck(int state, PlayerController player)
     {        
         if (state > 0)
         {
-            gameOver = true;
-            this.GetComponent<AudioSource>().Play();
-            UIController.GameEnd(state);
+            player.CallGameEnd(state);            
         }
+    }
+
+    public void GameOverBroadCast(int state)
+    {
+        gameOver = true;
+        this.GetComponent<AudioSource>().Play();
+        GameUIController.Instance.GameEnd(state);
     }
 
     

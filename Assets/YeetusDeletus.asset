@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86cf0ff8896f65541b335b544e555259, type: 3}
   m_Name: YeetusDeletus
   m_EditorClassIdentifier: 
-  objects: []
+  objects:
+  - {fileID: 0}

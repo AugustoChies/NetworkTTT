@@ -35,11 +35,10 @@ public class PlayerController : NetworkBehaviour
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.Log(LayerMask.NameToLayer("Slot"));
         if(Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Slot")))
         {
             Boardsection clicked = hit.collider.gameObject.GetComponent<Boardsection>();
-
+            AttemptPlayServerRPC(clicked.row, clicked.collum);
         }
     }
 
@@ -47,5 +46,51 @@ public class PlayerController : NetworkBehaviour
     public void AttemptPlayServerRPC(int row, int collum)
     {
         Board.Instance.UpdateBoard(OwnerClientId,row, collum);
+    }
+
+
+    public void CallClientVisualChange(int row, int collum, int ID)
+    {
+        UpgradeVisualsClientRPC(row, collum, ID);
+    }
+
+    [ClientRpc]
+    public void UpgradeVisualsClientRPC(int row, int collum, int ID)
+    {
+        Board.Instance.PlayVisuals(row, collum, ID);
+    }
+
+
+    public void CallGameEnd(int state)
+    {
+        GameEndClientRPC(state);
+    }
+
+    [ClientRpc]
+    public void GameEndClientRPC(int state)
+    {
+        Board.Instance.GameOverBroadCast(state);
+    }
+
+    public void CallMenu()
+    {
+        CallMenuClientRPC();
+    }
+
+    [ClientRpc]
+    public void CallMenuClientRPC()
+    {
+        GameUIController.Instance.BreakConnection(0);
+    }
+
+    public void CallRetry()
+    {
+        CallRetryClientRPC();
+    }
+
+    [ClientRpc]
+    public void CallRetryClientRPC()
+    {
+        GameUIController.Instance.RetryCallResponse();
     }
 }

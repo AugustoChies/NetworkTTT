@@ -6,8 +6,6 @@ using MLAPI.Messaging;
 
 public class ReferenceKeeping : MonoBehaviour
 {
-    public Board board;
-    public GameUIController uIController;
 
     public List<PlayerController> players = new List<PlayerController>();
 
@@ -22,7 +20,5 @@ public class ReferenceKeeping : MonoBehaviour
             }
         }
         return null;
-    }
-
-    
+    }   
 }

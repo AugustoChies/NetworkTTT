@@ -9,23 +9,31 @@ using MLAPI.Transports.UNET;
 
 public class GameUIController : MonoBehaviour
 {   
+    public static GameUIController Instance { get; private set; }
+
+
     [Header("Game End Properties")]
     public GameObject gameCanvas;
     public TextMeshProUGUI winnerText;
+    public GameObject ServerUI;
+    public GameObject ClientUI;
 
     [Space()]
     [Header("Main Menu Properties")]
     public GameObject menuCanvas;
     public TMP_InputField adressField;
-
+    public Board board;
     [Space()]
     public GameObject waitCanvas;
+    public ReferenceKeeping referencer;
 
     private readonly string localhost = "127.0.0.1";
 
     private void Start()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback += GoToGame;        
+        Instance = this;
+        NetworkManager.Singleton.OnClientConnectedCallback += GoToGame;
+        NetworkManager.Singleton.OnClientDisconnectCallback += BreakConnection;
     }
 
 
@@ -64,8 +72,11 @@ public class GameUIController : MonoBehaviour
 
     public void GameEnd(int value)
     {
-        gameCanvas.SetActive(true);        
-       
+        gameCanvas.SetActive(true);
+        ServerUI.SetActive(NetworkManager.Singleton.IsServer);
+        ClientUI.SetActive(!NetworkManager.Singleton.IsServer);
+
+
         switch (value)
         {
             case 1:
@@ -89,23 +100,48 @@ public class GameUIController : MonoBehaviour
     {
         waitCanvas.SetActive(false);
         menuCanvas.SetActive(false);
-        Board.Instance.gameObject.SetActive(true);
+        board.gameObject.SetActive(true);        
         ServerManager.Instance.AddPlayer(newplayer);
     }
 
+    public void BreakConnection(ulong required)
+    {
+        if (NetworkManager.Singleton.IsServer)
+        {
+            NetworkManager.Singleton.StopServer();
+        }
+        if (NetworkManager.Singleton.IsClient)
+        {
+            NetworkManager.Singleton.StopClient();
+        }
+        board.Setup();
+        board.gameObject.SetActive(false);
+        menuCanvas.SetActive(true);
+        gameCanvas.SetActive(false);
+        waitCanvas.SetActive(false);
+        ServerManager.Instance.playerIDList.Clear();
+        referencer.players.Clear();
+    }
+
+
+    public void RetryCallResponse()
+    {
+        gameCanvas.SetActive(false);
+        board.Setup();
+    }
 
     public void RetryButton()
     {
         this.GetComponent<AudioSource>().Play();
-        gameCanvas.SetActive(false);
-        Board.Instance.Setup();
+        PlayerController pc = referencer.GetLocalPlayer();
+        pc.CallRetry();
     }
 
     public void MenuButton()
     {
         this.GetComponent<AudioSource>().Play();
-        menuCanvas.SetActive(true);
-        gameCanvas.SetActive(false);
+        PlayerController pc = referencer.GetLocalPlayer();
+        pc.CallMenu();
     }
 
 }

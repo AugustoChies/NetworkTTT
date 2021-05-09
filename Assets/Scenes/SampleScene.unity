@@ -153,7 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIDList: 
-  currentPlayer: 0
+  currentPlayerIndex: 0
+  board: {fileID: 0}
 --- !u!4 &50355962
 Transform:
   m_ObjectHideFlags: 0
@@ -176,17 +177,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 879197173, guid: 6dd479a00231e0e4f9b25a0a1bde3b15, type: 3}
+      propertyPath: keeper
+      value: 
+      objectReference: {fileID: 340891140}
+    - target: {fileID: 879197173, guid: 6dd479a00231e0e4f9b25a0a1bde3b15, type: 3}
       propertyPath: UIController
       value: 
       objectReference: {fileID: 1230250807}
-    - target: {fileID: 1761958541, guid: 6dd479a00231e0e4f9b25a0a1bde3b15, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889993757, guid: 6dd479a00231e0e4f9b25a0a1bde3b15, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4199926521274513791, guid: 6dd479a00231e0e4f9b25a0a1bde3b15, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -235,10 +232,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Board
       objectReference: {fileID: 0}
-    - target: {fileID: 5734233775594247217, guid: 6dd479a00231e0e4f9b25a0a1bde3b15, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dd479a00231e0e4f9b25a0a1bde3b15, type: 3}
 --- !u!1 &340891139
@@ -270,9 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eaca7c225a7fae43bcf951a32324aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 1593831625}
-  uIController: {fileID: 0}
-  server: {fileID: 0}
+  players: []
 --- !u!4 &340891141
 Transform:
   m_ObjectHideFlags: 0
@@ -669,13 +660,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2176794107286845347, guid: 7fd33635334e17646afcb002d26e8c7b, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3423161652868746656, guid: 7fd33635334e17646afcb002d26e8c7b, type: 3}
       propertyPath: board
       value: 
       objectReference: {fileID: 1593831625}
+    - target: {fileID: 3423161652868746656, guid: 7fd33635334e17646afcb002d26e8c7b, type: 3}
+      propertyPath: referencer
+      value: 
+      objectReference: {fileID: 340891140}
     - target: {fileID: 3423161652868746657, guid: 7fd33635334e17646afcb002d26e8c7b, type: 3}
       propertyPath: m_Name
-      value: Main Canvass
+      value: Main Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 3423161652868746668, guid: 7fd33635334e17646afcb002d26e8c7b, type: 3}
       propertyPath: m_Pivot.x
