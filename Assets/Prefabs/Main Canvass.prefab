@@ -124,6 +124,7 @@ MonoBehaviour:
   adressField: {fileID: 3423161652449424628}
   board: {fileID: 0}
   waitCanvas: {fileID: 3625848627671938768}
+  referencer: {fileID: 0}
 --- !u!82 &3830073431912388040
 AudioSource:
   m_ObjectHideFlags: 0
@@ -227,6 +228,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3423161652868746668}
     m_Modifications:
+    - target: {fileID: 4292759824965664348, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4292759824965664350, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -335,6 +340,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3423161652868746656}
+    - target: {fileID: 5561880087937303172, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 3128.2178
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561880087937303172, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1759.6223
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
 --- !u!1 &3423161651824967391 stripped
@@ -368,6 +381,14 @@ PrefabInstance:
     - target: {fileID: 1281155458510295967, guid: f6426b266fc8e7640984ff0542d032f9, type: 3}
       propertyPath: m_Name
       value: WaitingCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281155458510295967, guid: f6426b266fc8e7640984ff0542d032f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284703782144892483, guid: f6426b266fc8e7640984ff0542d032f9, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7290906388061344922, guid: f6426b266fc8e7640984ff0542d032f9, type: 3}
       propertyPath: m_Pivot.x
@@ -488,12 +509,24 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MenuButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6086897301374376380, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
+      propertyPath: m_text
+      value: Hey, You Won
+      objectReference: {fileID: 0}
+    - target: {fileID: 7195300366397754876, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7305137417885935170, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
       propertyPath: m_Name
       value: GameCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 7305137417885935170, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335524930183035734, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7583669452504426166, guid: d0b82424ffb34df40b5e2a00557a96c3, type: 3}
