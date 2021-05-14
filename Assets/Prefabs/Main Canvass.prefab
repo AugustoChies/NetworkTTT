@@ -122,6 +122,12 @@ MonoBehaviour:
   ClientUI: {fileID: 1739044994977251593}
   menuCanvas: {fileID: 3423161651824967391}
   adressField: {fileID: 3423161652449424628}
+  roomField: {fileID: 4534200764370199528}
+  buttons:
+  - {fileID: 3423161652643329480}
+  - {fileID: 3423161652234714799}
+  - {fileID: 1751838928575706300}
+  - {fileID: 7528132557898898972}
   board: {fileID: 0}
   waitCanvas: {fileID: 3625848627671938768}
   referencer: {fileID: 0}
@@ -228,6 +234,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3423161652868746668}
     m_Modifications:
+    - target: {fileID: 461127046260955613, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -19
+      objectReference: {fileID: 0}
+    - target: {fileID: 890790282966463548, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3423161652868746656}
+    - target: {fileID: 890790282966463548, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CreateRoomButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 890790282966463548, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameUIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 890790282966463548, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1714889605470460577, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -145
+      objectReference: {fileID: 0}
+    - target: {fileID: 2031790957058371519, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3423161652868746656}
+    - target: {fileID: 2031790957058371519, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180425714383772760, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 114
+      objectReference: {fileID: 0}
     - target: {fileID: 4292759824965664348, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
@@ -348,6 +390,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 1759.6223
       objectReference: {fileID: 0}
+    - target: {fileID: 8965045762811272860, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3423161652868746656}
+    - target: {fileID: 8965045762811272860, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: JoinRoomButton
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
 --- !u!1 &3423161651824967391 stripped
@@ -360,9 +410,64 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4292759824965664350, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
   m_PrefabInstance: {fileID: 1446624371872448640}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3423161652643329480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4292759825792251208, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+  m_PrefabInstance: {fileID: 1446624371872448640}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3423161652234714799 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4292759826470092335, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+  m_PrefabInstance: {fileID: 1446624371872448640}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3423161652449424628 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4292759826659669108, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+  m_PrefabInstance: {fileID: 1446624371872448640}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1751838928575706300 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 890790282966463548, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+  m_PrefabInstance: {fileID: 1446624371872448640}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7528132557898898972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8965045762811272860, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
+  m_PrefabInstance: {fileID: 1446624371872448640}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4534200764370199528 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3098413466876535656, guid: cdeefdce8d21e0b47aaccdaf1878a87a, type: 3}
   m_PrefabInstance: {fileID: 1446624371872448640}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -378,6 +483,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3423161652868746668}
     m_Modifications:
+    - target: {fileID: 612053281737183874, guid: f6426b266fc8e7640984ff0542d032f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3423161652868746656}
+    - target: {fileID: 612053281737183874, guid: f6426b266fc8e7640984ff0542d032f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MenuButton
+      objectReference: {fileID: 0}
     - target: {fileID: 1281155458510295967, guid: f6426b266fc8e7640984ff0542d032f9, type: 3}
       propertyPath: m_Name
       value: WaitingCanvas
