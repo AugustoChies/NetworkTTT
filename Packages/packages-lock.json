@@ -9,6 +9,13 @@
       },
       "hash": "94f07d88ca3ebf875125b0f15c32ce1c9f2467e9"
     },
+    "com.mlapi.contrib.transport.photon-realtime": {
+      "version": "https://github.com/Unity-Technologies/mlapi-community-contributions.git?path=/Transports/com.mlapi.contrib.transport.photon-realtime",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "faa77c81d04d65cdba460550c8c05b5b60fe8ce7"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

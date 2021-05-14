@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using MLAPI;
 using MLAPI.Transports.UNET;
+using MLAPI.Transports.PhotonRealtime;
 
 public class GameUIController : MonoBehaviour
 {   
     public static GameUIController Instance { get; private set; }
 
+    public GameObject Unet;
+    public GameObject Photon;
 
     [Header("Game End Properties")]
     public GameObject gameCanvas;
@@ -34,15 +37,32 @@ public class GameUIController : MonoBehaviour
 
     private void Start()
     {
-        Instance = this;
+        Instance = this;       
+    }
+
+    private void InitNetSingleton()
+    {
         NetworkManager.Singleton.OnClientConnectedCallback += GoToGame;
         NetworkManager.Singleton.OnClientDisconnectCallback += BreakConnection;
     }
 
+    private void StartUnet()
+    {
+        Photon.SetActive(false);
+        Unet.SetActive(true);
+        InitNetSingleton();
+    }
 
+    private void StartPhtoton()
+    {
+        Unet.SetActive(false);
+        Photon.SetActive(true);
+        InitNetSingleton();
+    }
 
     public void StartServerButton()
     {
+        StartUnet();
         this.GetComponent<AudioSource>().Play();
         waitCanvas.SetActive(true);
         menuCanvas.SetActive(false);
@@ -51,6 +71,7 @@ public class GameUIController : MonoBehaviour
 
     public void StartClientButton()
     {
+        StartUnet();
         this.GetComponent<AudioSource>().Play();
         NetworkManager manager = NetworkManager.Singleton;        
         if (adressField.text == "")
@@ -72,6 +93,7 @@ public class GameUIController : MonoBehaviour
 
     public void CreateRoomButton()
     {
+        StartPhtoton();
         this.GetComponent<AudioSource>().Play();
         if (roomField.text == "")
         {
@@ -80,11 +102,13 @@ public class GameUIController : MonoBehaviour
         }
         waitCanvas.SetActive(true);
         menuCanvas.SetActive(false);
+        NetworkManager.Singleton.GetComponent<PhotonRealtimeTransport>().RoomName = roomField.text;
         NetworkManager.Singleton.StartHost();
     }
 
     public void JoinRoomButton()
     {
+        StartPhtoton();
         this.GetComponent<AudioSource>().Play();
         if (roomField.text == "")
         {
@@ -92,14 +116,9 @@ public class GameUIController : MonoBehaviour
             return;
         }
         NetworkManager manager = NetworkManager.Singleton;
-        if (adressField.text == "")
-        {
-            manager.GetComponent<UNetTransport>().ConnectAddress = localhost;
-        }
-        else
-        {
-            manager.GetComponent<UNetTransport>().ConnectAddress = adressField.text;
-        }
+        
+        manager.GetComponent<PhotonRealtimeTransport>().RoomName = roomField.text;
+        
         for (int i = 0; i < buttons.Count; i++)
         {
             buttons[i].interactable = false;
@@ -111,10 +130,7 @@ public class GameUIController : MonoBehaviour
 
     public void QuitButton()
     {
-        if (NetworkManager.Singleton.IsClient)
-        {
-            NetworkManager.Singleton.StopClient();
-        }
+        this.GetComponent<AudioSource>().Play();
         Application.Quit();
     }
 
@@ -201,9 +217,10 @@ public class GameUIController : MonoBehaviour
 
     IEnumerator BreakConnectionAttempt()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(15);
         if (!connected)
         {
+            Debug.Log("AutoDisc");
             NetworkManager.Singleton.StopClient();
             for (int i = 0; i < buttons.Count; i++)
             {
